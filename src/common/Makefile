@@ -5,7 +5,7 @@
 #-----------------------------------------------------------------------------
 include ../Make.common
 
-CC			?= gcc
+CC		?= gcc
 CFLAGS		+= -Wall -std=gnu11 -MMD \
 -I../../ext/uthash/src \
 -I../../ext/regex \
@@ -18,11 +18,11 @@ $(wildcard ../../ext/regex/reg*.c) \
 $(wildcard ../../ext/Unity/src/*.c)
 
 OBJS		:= $(SRCS:.c=.o) \
-				$(UNIXem_OBJS)
+		   $(UNIXem_OBJS)
 
 # -DUNITY_EXCLUDE_SETJMP_H for compilation in Linux
 CFLAGS		+= -DUNITY_EXCLUDE_SETJMP_H -I. -I../../ext/Unity/src \
-				$(UNIXem_CFLAGS)
+		   $(UNIXem_CFLAGS)
 
 DEPENDS		:= $(SRCS:.c=.d)
 

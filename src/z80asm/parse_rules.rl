@@ -510,11 +510,6 @@ Define rules for a ragel-based parser.
 				asm_C_LINE(expr_value, Str_data(name)); 
 		}
 		
-		| label? _TK_INCLUDE string _TK_NEWLINE @{ 
-			DO_STMT_LABEL(); 
-			asm_INCLUDE(Str_data(name)); 
-		}
-		
 		| label? _TK_BINARY string _TK_NEWLINE @{ 
 			DO_STMT_LABEL(); 
 			asm_BINARY(Str_data(name)); 

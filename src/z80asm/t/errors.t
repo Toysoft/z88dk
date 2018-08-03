@@ -2,10 +2,9 @@
 
 # Z88DK Z80 Macro Assembler
 #
-# Copyright (C) Gunther Strube, InterLogic 1993-99
-# Copyright (C) Paulo Custodio, 2011-2017
+# Copyright (C) Paulo Custodio, 2011-2018
 # License: The Artistic License 2.0, http://www.perlfoundation.org/artistic_license_2_0
-# Repository: https://github.com/pauloscustodio/z88dk-z80asm
+# Repository: https://github.com/z88dk/z88dk
 #
 # Test error messages
 
@@ -479,17 +478,9 @@ t_binary(read_binfile("test.bin"), "\xFE\x10");
 #------------------------------------------------------------------------------
 unlink_testfiles();
 
-my $objs = "errors.o error_func.o scan.o lib/array.o lib/class.o lib/str.o lib/strhash.o lib/list.o  ../common/fileutil.o ../common/strutil.o ../common/die.o ../common/objfile.o ../../ext/regex/regcomp.o ../../ext/regex/regerror.o ../../ext/regex/regexec.o ../../ext/regex/regfree.o options.o model.o module.o sym.o symtab.o codearea.o expr.o listfile.o lib/srcfile.o macros.o hist.o lib/dbg.o ../../ext/UNIXem/src/glob.o ../../ext/UNIXem/src/dirent.o";
+my $objs = "errors.o error_func.o scan.o preproc.o preproc_re.o lib/array.o lib/class.o lib/str.o lib/strhash.o lib/list.o  ../common/fileutil.o ../common/strutil.o ../common/die.o ../common/objfile.o ../../ext/regex/regcomp.o ../../ext/regex/regerror.o ../../ext/regex/regexec.o ../../ext/regex/regfree.o options.o model.o module.o sym.o symtab.o codearea.o expr.o listfile.o lib/srcfile.o libfile.o z80asm.o zobjfile.o modlink.o z80pass.o parse.o opcodes.o directives.o macros.o macros_re.o hist.o lib/dbg.o ../../ext/UNIXem/src/glob.o ../../ext/UNIXem/src/dirent.o";
 
-# get init code except init() and main()
-my $init = <<'END';
-
-FILE *errfile;
-char *GetLibfile( char *filename ) {return NULL;}
-
-END
-
-t_compile_module($init, <<'END', $objs);
+t_compile_module('', <<'END', $objs);
 #define ERROR return __LINE__
 #define check_count(e) if (get_num_errors() != e) ERROR;
 
@@ -525,7 +516,7 @@ end
 ERR
 
 
-t_compile_module($init, <<'END', $objs);
+t_compile_module('', <<'END', $objs);
 #define ERROR return __LINE__
 #define check_count(e) if (get_num_errors() != e) ERROR;
 #define SYNTAX(file,module,line) \

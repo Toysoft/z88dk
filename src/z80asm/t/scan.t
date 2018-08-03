@@ -2,10 +2,9 @@
 
 # Z88DK Z80 Macro Assembler
 #
-# Copyright (C) Gunther Strube, InterLogic 1993-99
-# Copyright (C) Paulo Custodio, 2011-2017
+# Copyright (C) Paulo Custodio, 2011-2018
 # License: The Artistic License 2.0, http://www.perlfoundation.org/artistic_license_2_0
-# Repository: https://github.com/pauloscustodio/z88dk-z80asm
+# Repository: https://github.com/z88dk/z88dk
 #
 # Test scan.rl
 
@@ -15,10 +14,10 @@ use File::Slurp;
 use Test::Differences; 
 require './t/test_utils.pl';
 
-my $objs = "scan.o errors.o error_func.o model.o module.o codearea.o listfile.o ".
+my $objs = "scan.o preproc.o preproc_re.o errors.o error_func.o model.o module.o codearea.o listfile.o ".
 		   "options.o hist.o sym.o symtab.o expr.o ".
 		   "lib/str.o lib/strhash.o  ../common/fileutil.o ../common/strutil.o ../common/die.o ../common/objfile.o ../../ext/regex/regcomp.o ../../ext/regex/regerror.o ../../ext/regex/regexec.o ../../ext/regex/regfree.o ".
-		   "lib/srcfile.o macros.o lib/class.o ".
+		   "lib/srcfile.o libfile.o z80asm.o zobjfile.o modlink.o z80pass.o parse.o opcodes.o directives.o macros.o macros_re.o lib/class.o ".
 		   "lib/list.o lib/array.o lib/dbg.o ../../ext/UNIXem/src/glob.o ../../ext/UNIXem/src/dirent.o";
 		   
 my $init = <<'END';
@@ -27,8 +26,6 @@ my $init = <<'END';
 #include "macros.h"
 #include "strutil.h"
 #include <assert.h>
-
-char *GetLibfile( char *filename ) {return NULL;}
 
 #define T_GET_N( exp_token, exp_text, exp_len ) \
 	token = GetSym(); \
@@ -801,7 +798,6 @@ t_compile_module($init, <<'END', $objs);
 	T_OPCODE(IF,		T_ALL);
 	T_OPCODE(IFDEF,		T_ALL);
 	T_OPCODE(IFNDEF,	T_ALL);
-	T_OPCODE(INCLUDE,	T_ALL);
 	T_OPCODE(LINE,		T_ALL);
 	T_OPCODE(LSTOFF,	T_ALL);
 	T_OPCODE(LSTON,		T_ALL);

@@ -2,10 +2,9 @@
 
 # Z88DK Z80 Macro Assembler
 #
-# Copyright (C) Gunther Strube, InterLogic 1993-99
-# Copyright (C) Paulo Custodio, 2011-2017
+# Copyright (C) Paulo Custodio, 2011-2018
 # License: The Artistic License 2.0, http://www.perlfoundation.org/artistic_license_2_0
-# Repository: https://github.com/pauloscustodio/z88dk-z80asm
+# Repository: https://github.com/z88dk/z88dk
 #
 # Test object file output from z80asm
 
@@ -4463,21 +4462,9 @@ t_binary(read_binfile(bin_file()), "\xC3\x00\x00");
 #------------------------------------------------------------------------------
 unlink_testfiles();
 
-my $objs = "zobjfile.o lib/class.o lib/array.o errors.o error_func.o lib/str.o lib/strhash.o lib/list.o  ../common/fileutil.o ../common/strutil.o ../common/die.o ../common/objfile.o ../../ext/regex/regcomp.o ../../ext/regex/regerror.o ../../ext/regex/regexec.o ../../ext/regex/regfree.o scan.o options.o model.o module.o sym.o symtab.o lib/srcfile.o macros.o hist.o expr.o listfile.o codearea.o lib/dbg.o ../../ext/UNIXem/src/glob.o ../../ext/UNIXem/src/dirent.o";
+my $objs = "lib/class.o lib/array.o errors.o error_func.o lib/str.o lib/strhash.o lib/list.o  ../common/fileutil.o ../common/strutil.o ../common/die.o ../common/objfile.o ../../ext/regex/regcomp.o ../../ext/regex/regerror.o ../../ext/regex/regexec.o ../../ext/regex/regfree.o scan.o preproc.o preproc_re.o options.o model.o module.o sym.o symtab.o lib/srcfile.o libfile.o z80asm.o zobjfile.o modlink.o z80pass.o parse.o opcodes.o directives.o macros.o macros_re.o hist.o expr.o listfile.o codearea.o lib/dbg.o ../../ext/UNIXem/src/glob.o ../../ext/UNIXem/src/dirent.o";
 
-# get init code except init() and main()
-my $init = <<'END';
-
-#include "symbol.h"
-#include <assert.h>
-
-FILE *errfile;
-char *GetLibfile( char *filename ) {return NULL;}
-
-END
-
-
-t_compile_module($init, <<'END', $objs);
+t_compile_module('', <<'END', $objs);
 
 #define SEL3(i,a,b,c)	((i)<=0?(a):(i)<=1?(b):(c))
 

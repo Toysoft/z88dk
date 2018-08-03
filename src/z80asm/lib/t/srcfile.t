@@ -2,10 +2,9 @@
 
 # Z88DK Z80 Macro Assembler
 #
-# Copyright (C) Gunther Strube, InterLogic 1993-99
-# Copyright (C) Paulo Custodio, 2011-2017
+# Copyright (C) Paulo Custodio, 2011-2018
 # License: The Artistic License 2.0, http://www.perlfoundation.org/artistic_license_2_0
-# Repository: https://github.com/pauloscustodio/z88dk-z80asm
+# Repository: https://github.com/z88dk/z88dk
 #
 # Test srcfile
 
@@ -15,8 +14,8 @@ use File::Slurp;
 use File::Path qw(make_path remove_tree);
 use Capture::Tiny 'capture';
 use Test::Differences; 
+my $compile = "gcc -I../../../ext/uthash/src -Ilib -I../../common -otest test.c srcfile.c class.c alloc.c str.c list.c dbg.c  ../../common/die.o ../../common/fileutil.o ../../common/strutil.o ../errors.o ../error_func.o ../options.o ../model.o ../hist.o ../codearea.o ../module.o strhash.o array.o ../sym.o ../symtab.o ../expr.o ../../common/objfile.o ../z80asm.o ../zobjfile.o ../macros.o ../listfile.o ../libfile.o ../../../ext/regex/regcomp.o ../../../ext/regex/regerror.o ../../../ext/regex/regexec.o ../../../ext/regex/regfree.o ../modlink.o ../z80pass.o ../scan.o ../preproc.o ../preproc_re.o ../../../ext/UNIXem/src/glob.o ../../../ext/UNIXem/src/dirent.o ../parse.o ../directives.o ../opcodes.o ";
 
-my $compile = "gcc -I../../../ext/uthash/src -Ilib -I../../common -otest test.c srcfile.c class.c alloc.c str.c list.c dbg.c  ../../common/die.o ../../common/fileutil.o ../../common/strutil.o ../errors.o ../error_func.o ../options.o ../model.o ../hist.o ../codearea.o ../module.o strhash.o array.o ../sym.o ../symtab.o ../expr.o ../../common/objfile.o ../z80asm.o ../zobjfile.o ../macros.o ../listfile.o ../libfile.o ../../../ext/regex/regcomp.o ../../../ext/regex/regerror.o ../../../ext/regex/regexec.o ../../../ext/regex/regfree.o ../modlink.o ../z80pass.o ../scan.o ../../../ext/UNIXem/src/glob.o ../../../ext/UNIXem/src/dirent.o ../parse.o ../directives.o ../opcodes.o ";
 
 #------------------------------------------------------------------------------
 # create directories and files

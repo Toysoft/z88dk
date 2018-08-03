@@ -203,10 +203,13 @@
     <ClCompile Include="..\..\src\z80asm\lib\strhash.c" />
     <ClCompile Include="..\..\src\z80asm\listfile.c" />
     <ClCompile Include="..\..\src\z80asm\macros.c" />
+    <ClCompile Include="..\..\src\z80asm\macros_re.c" />
     <ClCompile Include="..\..\src\z80asm\main.c" />
     <ClCompile Include="..\..\src\z80asm\model.c" />
     <ClCompile Include="..\..\src\z80asm\modlink.c" />
     <ClCompile Include="..\..\src\z80asm\module.c" />
+    <ClCompile Include="..\..\src\z80asm\preproc.c" />
+    <ClCompile Include="..\..\src\z80asm\preproc_re.c" />
     <ClCompile Include="..\..\src\z80asm\zobjfile.c" />
     <ClCompile Include="..\..\src\z80asm\opcodes.c" />
     <ClCompile Include="..\..\src\z80asm\options.c" />
@@ -246,6 +249,7 @@
     <ClInclude Include="..\..\src\z80asm\model.h" />
     <ClInclude Include="..\..\src\z80asm\modlink.h" />
     <ClInclude Include="..\..\src\z80asm\module.h" />
+    <ClInclude Include="..\..\src\z80asm\preproc.h" />
     <ClInclude Include="..\..\src\z80asm\zobjfile.h" />
     <ClInclude Include="..\..\src\z80asm\opcodes.h" />
     <ClInclude Include="..\..\src\z80asm\options.h" />
